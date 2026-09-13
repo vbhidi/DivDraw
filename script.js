@@ -11,6 +11,7 @@ const grid = [];
 
 // dom elements
 const body = document.querySelector("body");
+const grid_size_element = document.querySelector("#grid-size");
 const grid_container = document.querySelector(".grid-container");
 const size_button = document.querySelector("#size");
 const toggle_grid_button = document.querySelector("#toggle-grid");
@@ -81,6 +82,8 @@ function draw(cell)
                 cell.style.opacity = cell.style.opacity - 0.1;
             break;
         case 'E':
+            cell.style.backgroundColor = background_color;
+            cell.style.opacity = "";
             break;
     }
 }
@@ -122,6 +125,7 @@ function changeGridSize()
         return;
     }
     deleteGrid()
+    grid_size_element.textContent = `${newGridSize}x${newGridSize}`;
     currentGridSize = newGridSize;
     create_grid();
     
