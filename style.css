@@ -1,0 +1,25 @@
+*
+{
+    box-sizing: border-box;
+}
+
+body
+{
+    color: green;
+    background-color: #161616;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container
+{
+    display: flex;
+    flex-flow: column nowrap;
+    height: 70vh;
+    width: 70vh;
+    border: 1px solid white;
+}
