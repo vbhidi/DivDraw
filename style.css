@@ -22,4 +22,5 @@ body
     height: 70vh;
     width: 70vh;
     border: 1px solid white;
+    user-select: none;
 }
