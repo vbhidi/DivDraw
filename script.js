@@ -1,26 +1,35 @@
-// todo: add toggle grid button or maybe not
+let currentGridSize = 16;
 let drawing = false;
 let color = "white";
+let background_color = "rgb(0, 10, 0)";
 const grid = [];
 
+// dom elements
 const body = document.querySelector("body");
 const grid_container = document.querySelector(".grid-container");
+const size_button = document.querySelector("#size");
+const toggle_grid_button = document.querySelector("#toggle-grid");
+const regular_button = document.querySelector("#regular");
+const rainbow_button = document.querySelector("#rainbow");
+const dim_button = document.querySelector("#dim");
 
-// creates grid of input grid size 
-function create_grid(grid_size)
+
+// functions
+// creates and draws grid of input grid size, references currentGridSize variable
+function create_grid()
 {
-    for (let i = 0; i < grid_size; i++)
+    for (let i = 0; i < currentGridSize; i++)
     {
         // making rows for cells
         grid[i] = document.createElement("div")
         grid[i].style.display = "flex";
         grid[i].style.flex = "1 1 auto";
-        for (let j = 0; j < grid_size; j++)
+        for (let j = 0; j < currentGridSize; j++)
         {
             // create each cell of grid
             grid[i][j] = document.createElement("div");
             grid[i][j].style.flex = "1 1 auto";
-            grid[i][j].style.backgroundColor = "rgb(0, 10, 0)";
+            grid[i][j].style.backgroundColor = background_color;
             
             // event listeners
             grid[i][j].addEventListener("mouseover", () => {
@@ -33,17 +42,51 @@ function create_grid(grid_size)
                 grid[i][j].style.backgroundColor = color;
             })
 
+            // append to row
             grid[i].appendChild(grid[i][j]);
         }
         grid_container.appendChild(grid[i]);
     }
 }
 
+// references currentGridSize variable
+function deleteGrid()
+{
+    for (let i = 0; i < currentGridSize; i++)
+    {
+        grid[i].remove();
+        for (let j = 0; j < currentGridSize; j++)
+        {
+            grid[i][j].remove();
+        }
+    }
+}
+
+function changeGridSize()
+{
+    let newGridSize = prompt("Enter grid size", 16);
+    // prompt returns string
+    newGridSize = +newGridSize;
+    if (!Number.isInteger(newGridSize) || newGridSize < 1 || newGridSize > 64)
+    {
+        alert("Grid size should be a positive integer between 1 and 64.");
+        return;
+    }
+    deleteGrid()
+    currentGridSize = newGridSize;
+    create_grid();
+}
+
+create_grid();
+
+
+// event selectors
+// to draw
 grid_container.addEventListener("mousedown", () => {
     drawing = true;
 });
 body.addEventListener("mouseup", () => {
     drawing = false;
 })
-
-create_grid(64);
+// for buttons
+size_button.addEventListener("click", changeGridSize);
