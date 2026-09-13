@@ -62,9 +62,18 @@ function draw(cell)
     {
         case 'P':
             cell.style.backgroundColor = color;
+            break;
         case 'R':
+            let randColor = [];
+            randColor[0] = Math.floor(Math.random() * 256);
+            randColor[1] = Math.floor(Math.random() * 256);
+            randColor[2] = Math.floor(Math.random() * 256);
+            cell.style.backgroundColor = `rgb(${randColor[0]}, ${randColor[1]}, ${randColor[2]})`;
+            break;
         case 'D':
+            break;
         case 'E':
+            break;
     }
 }
 
