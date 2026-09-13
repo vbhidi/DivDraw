@@ -1,7 +1,8 @@
 let currentGridSize = 16;
 let drawing = false;
 let color = "white";
-let background_color = "rgb(0, 10, 0)";
+let background_color = "black";
+let gridOn = false;
 const grid = [];
 
 // dom elements
@@ -9,6 +10,7 @@ const body = document.querySelector("body");
 const grid_container = document.querySelector(".grid-container");
 const size_button = document.querySelector("#size");
 const toggle_grid_button = document.querySelector("#toggle-grid");
+const clear_button = document.querySelector("#clear");
 const regular_button = document.querySelector("#regular");
 const rainbow_button = document.querySelector("#rainbow");
 const dim_button = document.querySelector("#dim");
@@ -46,6 +48,19 @@ function create_grid()
             grid[i].appendChild(grid[i][j]);
         }
         grid_container.appendChild(grid[i]);
+    }
+}
+
+// selects each cell from grid starting from 0th row and column
+// references CurrentGridSize variable
+function modifyGridCells(callback)
+{
+    for (let i = 0; i < currentGridSize; i++)
+    {
+        for (let j = 0; j < currentGridSize; j++)
+        {
+            callback(grid[i][j]);
+        }
     }
 }
 
@@ -90,3 +105,26 @@ body.addEventListener("mouseup", () => {
 })
 // for buttons
 size_button.addEventListener("click", changeGridSize);
+toggle_grid_button.addEventListener("click", () => {
+    // toggle grid
+    modifyGridCells((cell) => {
+        if (!gridOn)
+        {
+            cell.style.border = "0.5px solid darkslategray";
+            return;
+        }
+        cell.style.border = "";
+    })
+    // toggle gridOn variable
+    if (!gridOn)
+    {
+        gridOn = true;
+        return;
+    }
+    gridOn = false;
+});
+clear_button.addEventListener("click", () => {
+    modifyGridCells((cell) => {
+        cell.style.backgroundColor = background_color;
+    })
+});
