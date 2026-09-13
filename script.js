@@ -90,6 +90,12 @@ function changeGridSize()
     deleteGrid()
     currentGridSize = newGridSize;
     create_grid();
+    
+    // since this function also removes gridlines
+    if (gridOn)
+    {
+        gridOn = false;
+    }
 }
 
 create_grid();
