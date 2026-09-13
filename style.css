@@ -11,8 +11,45 @@ body
     margin: 0;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
     align-items: center;
+}
+
+h1
+{
+    margin: 32px 0 48px;
+}
+
+main
+{
+    display: flex;
+    gap: 8px;
+    flex: 1 1 auto;
+}
+
+.tool-container
+{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+}
+.tool-container .btn
+{
+    display: block;
+    font-size: 1em;
+    font-weight: 600;
+    background-color: black;
+    color: green;
+    padding: 4px;
+    margin-bottom: 8px;
+    width: 80px;
+}
+.btn.pen
+{
+    width: 32px;
+}
+.btn.pen#regular
+{
+    margin-top: 32px;
 }
 
 .grid-container
@@ -23,4 +60,20 @@ body
     width: 70vh;
     border: 1px solid white;
     user-select: none;
+    /* hack to make the grid container appear at center of page */
+    margin-right: 88px;
+}
+
+footer
+{
+    height: 40px;
+}
+a
+{
+    color:rgb(98, 110, 235);
+}
+a:hover
+{
+    filter: brightness(0.9);
+    text-decoration: none;
 }

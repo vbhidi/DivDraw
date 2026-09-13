@@ -1,2 +1,2 @@
-# div-draw
+# DivDraw
 Silly drawing in your browser.
