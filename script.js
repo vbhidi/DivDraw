@@ -129,6 +129,7 @@ function changeGridSize()
     if (gridOn)
     {
         gridOn = false;
+        toggle_grid_button.click();
     }
 }
 
