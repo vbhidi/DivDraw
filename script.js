@@ -57,11 +57,11 @@ function create_grid()
 function draw(cell)
 {
     let mode = currentPen.textContent;
-    console.log(mode);
     switch (mode)
     {
         case 'P':
             cell.style.backgroundColor = color;
+            cell.style.opacity = "";
             break;
         case 'R':
             let randColor = [];
@@ -69,8 +69,16 @@ function draw(cell)
             randColor[1] = Math.floor(Math.random() * 256);
             randColor[2] = Math.floor(Math.random() * 256);
             cell.style.backgroundColor = `rgb(${randColor[0]}, ${randColor[1]}, ${randColor[2]})`;
+            cell.style.opacity = "";
             break;
         case 'D':
+            if (cell.style.opacity === "")
+            {
+                cell.style.opacity = 0.9;
+                break;
+            }
+            if (cell.style.opacity > 0)
+                cell.style.opacity = cell.style.opacity - 0.1;
             break;
         case 'E':
             break;
@@ -159,6 +167,7 @@ toggle_grid_button.addEventListener("click", () => {
 clear_button.addEventListener("click", () => {
     modifyGridCells((cell) => {
         cell.style.backgroundColor = background_color;
+        cell.style.opacity = "";
     })
 });
 
