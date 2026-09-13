@@ -1,3 +1,7 @@
+let currentPen = document.querySelector("#regular");
+currentPen.style.backgroundColor = "darkgreen";
+currentPen.style.color = "white";
+
 let currentGridSize = 16;
 let drawing = false;
 let color = "white";
@@ -11,13 +15,11 @@ const grid_container = document.querySelector(".grid-container");
 const size_button = document.querySelector("#size");
 const toggle_grid_button = document.querySelector("#toggle-grid");
 const clear_button = document.querySelector("#clear");
-const regular_button = document.querySelector("#regular");
-const rainbow_button = document.querySelector("#rainbow");
-const dim_button = document.querySelector("#dim");
+const penList = document.querySelectorAll(".pen");
 
 
 // functions
-// creates and draws grid of input grid size, references currentGridSize variable
+// creates grid of input grid size, references currentGridSize variable
 function create_grid()
 {
     for (let i = 0; i < currentGridSize; i++)
@@ -37,17 +39,32 @@ function create_grid()
             grid[i][j].addEventListener("mouseover", () => {
                 if (drawing)
                 {
-                    grid[i][j].style.backgroundColor = color;
+                    draw(grid[i][j]);
                 }
             })
             grid[i][j].addEventListener("click", () => {
-                grid[i][j].style.backgroundColor = color;
+                draw(grid[i][j]);
             })
 
             // append to row
             grid[i].appendChild(grid[i][j]);
         }
         grid_container.appendChild(grid[i]);
+    }
+}
+
+// implements drawing modes
+function draw(cell)
+{
+    let mode = currentPen.textContent;
+    console.log(mode);
+    switch (mode)
+    {
+        case 'P':
+            cell.style.backgroundColor = color;
+        case 'R':
+        case 'D':
+        case 'E':
     }
 }
 
@@ -109,6 +126,7 @@ grid_container.addEventListener("mousedown", () => {
 body.addEventListener("mouseup", () => {
     drawing = false;
 })
+
 // for buttons
 size_button.addEventListener("click", changeGridSize);
 toggle_grid_button.addEventListener("click", () => {
@@ -134,3 +152,14 @@ clear_button.addEventListener("click", () => {
         cell.style.backgroundColor = background_color;
     })
 });
+
+// for pens
+penList.forEach((pen) => {
+    pen.addEventListener("click", () => {
+        currentPen.style.backgroundColor = "black";
+        currentPen.style.color = "green";
+        currentPen = pen;
+        currentPen.style.backgroundColor = "darkgreen";
+        currentPen.style.color = "white";
+    })
+})

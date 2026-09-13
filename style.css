@@ -43,6 +43,11 @@ main
     margin-bottom: 8px;
     width: 80px;
 }
+.btn.option:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
 .btn.pen
 {
     width: 32px;
